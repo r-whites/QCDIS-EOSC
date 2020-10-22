@@ -1,0 +1,18 @@
+dependencies:
+- name: rabbitmq
+  repository: https://charts.bitnami.com/bitnami
+  version: 6.18.2
+- name: mongodb
+  repository: https://charts.bitnami.com/bitnami
+  version: 7.8.10
+- name: sure-tosca
+  repository: file://local-charts/sure-tosca
+  version: 0.1.0
+- name: manager
+  repository: file://local-charts/manager
+  version: 0.1.0
+- name: planner
+  repository: file://local-charts/planner
+  version: 0.1.0
+digest: sha256:30a8ee0c83bc1e53d05866dda3dcced9919fa7e53860d78e6b70d21d41d40715
+generated: "2020-10-22T10:00:20.410943+02:00"

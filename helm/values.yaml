@@ -1,0 +1,24 @@
+global:
+    storageClass: jelastic-dynamic-volume
+    mongodb_host: sdia-mongodb
+    rabbitmq_host: sdia-rabbitmq
+
+manager:
+    image:
+        repository: qcdis/manager
+        tag: latest
+    sure_tosca_base_path: "http://sure-tosca:8081/tosca-sure/1.0.0"
+    replicaCount: 1
+    credential_secret: top_secret
+
+planner:
+    image:
+        repository: qcdis/planner
+        tag: latest
+    replicaCount: 1
+
+sure-tosca:
+    image:
+        repository: qcdis/sure-tosca
+        tag: latest
+    replicaCount: 1
