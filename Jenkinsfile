@@ -1,9 +1,10 @@
+properties([pipelineTriggers([githubPush()])])
 pipeline {
 
     agent {
         kubernetes {
-            defaultContainer: 'jnlp'
-            yamlFile: 'build_pod.yaml'
+            defaultContainer 'jnlp'
+            yamlFile 'build_pod.yaml'
         }
     }
 
