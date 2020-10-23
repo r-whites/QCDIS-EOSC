@@ -10,11 +10,13 @@ pipeline {
 
     stages {
         stage('Build') {
-            steps {
-                container('maven') {
-                    sh 'mvn -h'
+            dir('SDIA/manager') {
+                steps {
+                    container('maven') {
+                        sh 'pwd'
+                    }
                 }
-            }
+            }   
         }
     }
 }
