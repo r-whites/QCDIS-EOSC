@@ -13,7 +13,7 @@ pipeline {
                 steps {
                     dir('SDIA/manager') {
                         container('maven') {
-                            sh 'pwd'
+                            sh 'mvn -Dmaven.test.skip=true dockerfile:build'
                         }
                     }
                 }
