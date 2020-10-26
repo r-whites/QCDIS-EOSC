@@ -40,7 +40,7 @@ pipeline {
                 dir('test-helm') {
                     container('helm') {
                         withDockerRegistry([credentialsId: "${REGISTRY_CREDENTIAL}", url: ""]) {
-                            sh "helm upgrade -n test flaskapp ./"
+                            sh "helm upgrade -n ${NAMSPACE} ${RELEASE} ./"
                         }
                     }
                 }
