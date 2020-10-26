@@ -4,8 +4,15 @@ ingress:
 managedConfig:
 
   security:
-      realm: jenkins_database
-      adminPassword: '${JENKINS_ADMIN_CREDENTIALS_PASSWORD}'
+    realm: jenkins_database
+    adminPassword: '${JENKINS_ADMIN_CREDENTIALS_PASSWORD}'
+
+  credentials:
+    docker-registry:
+      type: userpass
+      username: '${DOCKER_REGISTRY_CREDENTIALS_USERNAME}'
+      password: '${DOCKER_REGISTRY_CREDENTIALS_PASSWORD}'
 
 envSecrets:
     - jenkins-admin-credentials
+    - docker-registry-credentials
