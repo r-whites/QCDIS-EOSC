@@ -1,0 +1,4 @@
+image:
+    repository: rwhites/eosc
+    tag: 1.0.0
+replicaCount: 1
