@@ -19,7 +19,7 @@ pipeline {
     stages {
         stage('Build Flask App') {
             steps {
-                dir('App/src') {
+                dir('App') {
                     container('docker') {
                         sh "docker build -t ${REGISTRY}:${VERSION} ."
                     }
@@ -37,7 +37,7 @@ pipeline {
         }
         stage('Update Flask App') {
             steps {
-                dir('App/helm') {
+                dir('helm/App') {
                     container('helm') {
                         sh "helm upgrade -n ${NAMESPACE} ${CHART_RELEASE} ./"
                     }
