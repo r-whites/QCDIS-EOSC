@@ -39,7 +39,7 @@ pipeline {
             steps {
                 dir('test-helm') {
                     container('helm') {
-                        sh "helm upgrade -n ${NAMSPACE} ${RELEASE} ./"
+                        sh "helm upgrade -n ${NAMESPACE} ${CHART_RELEASE} ./"
                     }
                 }
             }
