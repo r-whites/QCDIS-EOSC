@@ -39,9 +39,7 @@ pipeline {
             steps {
                 dir('test-helm') {
                     container('helm') {
-                        withDockerRegistry([credentialsId: "${REGISTRY_CREDENTIAL}", url: ""]) {
-                            sh "helm upgrade -n ${NAMSPACE} ${RELEASE} ./"
-                        }
+                        sh "helm upgrade -n ${NAMSPACE} ${RELEASE} ./"
                     }
                 }
             }
