@@ -9,11 +9,10 @@ metadata:
     heritage: {{ .Release.Service  | quote }}
     version: {{ .Values.image.tag | quote }}
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
-    - port: 5000
-      nodePort: 30000
-      protocol: TCP
-      name: http
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
   selector:
     app: {{ template "fullname" . }}

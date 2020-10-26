@@ -5,6 +5,8 @@ pipeline {
         VERSION = '1.0.0'
         REGISTRY_CREDENTIAL = 'docker-registry'
         REGISTRY = 'rwhites/eosc'
+        CHART_RELEASE = 'flaskapp'
+        NAMESPACE = 'test'
     }
 
     agent {
@@ -15,7 +17,7 @@ pipeline {
     }
 
     stages {
-        stage('Build Flask Test App') {
+        stage('Build Flask App') {
             steps {
                 dir('Test') {
                     container('docker') {
@@ -24,11 +26,22 @@ pipeline {
                 }
             }
         }
-        stage('Push Flask Test App Image') {
+        stage('Publish Flask App') {
             steps {
                 container('docker') {
                     withDockerRegistry([credentialsId: "${REGISTRY_CREDENTIAL}", url: ""]) {
                         sh "docker push ${REGISTRY}:${VERSION}"
+                    }
+                }
+            }
+        }
+        stage('Update Flask App') {
+            steps {
+                dir('test-helm') {
+                    container('helm') {
+                        withDockerRegistry([credentialsId: "${REGISTRY_CREDENTIAL}", url: ""]) {
+                            sh "helm upgrade -n test flaskapp ./"
+                        }
                     }
                 }
             }
