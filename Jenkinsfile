@@ -10,26 +10,11 @@ pipeline {
 
     stages {
         stage('Build') {
-                parallel {
-                    stage('Build SDIA Manager') {
-                        steps {
-                            dir('SDIA/manager') {
-                                container('maven') {
-				                    sh 'pwd'
-                                    sh 'mvn -Dmaven.test.skip=true install'
-                                    sh 'mvn -Dmaven.test.skip=true dockerfile:build'
-                                }
-                            }
-                        }
-                    }
-                    stage('Build SDIA Planner') {
-                        steps {
-                            dir('SDIA/planner') {
-                                container('maven') {
-                                    sh 'mvn -Dmaven.test.skip=true install'
-                                    sh 'mvn -Dmaven.test.skip=true dockerfile:build'
-                                }
-                            }
+                steps {
+                    dir('Test') {
+                        container('docker') {
+                            sh 'Building Test app Docker image ..'
+                            sh 'docker image build test-flask-app .'
                         }
                     }
                 }
