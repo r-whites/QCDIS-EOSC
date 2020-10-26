@@ -13,7 +13,7 @@ pipeline {
                 steps {
                     dir('Test') {
                         container('docker') {
-                            sh 'echo \'Building Test app Docker image ../''
+                            sh 'echo \'Building Test app Docker image ..\''
                             sh 'docker image build test-flask-app .'
                         }
                     }
