@@ -12,7 +12,7 @@ pipeline {
     agent {
         kubernetes {
             defaultContainer 'jnlp'
-            yamlFile 'build_pod.yaml'
+            yamlFile 'jenkins/build_pod.yaml'
         }
     }
 
