@@ -1,6 +1,9 @@
 ingress:
   enabled: true
 
+rbac:
+  clusterWideAccess: true
+
 managedConfig:
 
   security:
