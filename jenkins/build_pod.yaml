@@ -5,6 +5,7 @@ metadata:
       name: build-pod
 spec:
   serviceAccountName: jenkins-my-bloody-jenkins
+  automountServiceAccountToken: true
   containers:
       - name: maven
         image: maven:3.6.3-jdk-11
