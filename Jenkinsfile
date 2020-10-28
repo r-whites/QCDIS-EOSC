@@ -5,8 +5,7 @@ pipeline {
         VERSION = '1.0.0'
         REGISTRY_CREDENTIAL = 'docker-registry'
         REGISTRY = 'rwhites/eosc'
-        CHART_RELEASE = 'flaskapp'
-        NAMESPACE = 'test'
+        RELEASE = 'flaskapp'
     }
 
     agent {
@@ -40,7 +39,7 @@ pipeline {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "helm upgrade --install -n ${NAMESPACE} ${CHART_RELEASE} ./"
+                        sh "helm upgrade --install --force ${RELEASE} ./"
                     }
                 }
             }
