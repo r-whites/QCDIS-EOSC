@@ -39,7 +39,7 @@ pipeline {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "helm upgrade --install --force ${RELEASE} ./"
+                        sh "helm upgrade ${RELEASE} ./"
                     }
                 }
             }
