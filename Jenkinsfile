@@ -2,10 +2,10 @@ properties([pipelineTriggers([githubPush()])])
 pipeline {
 
     environment {
-        VERSION = '1.0.0'
         REGISTRY_CREDENTIAL = 'docker-registry'
         REGISTRY = 'rwhites/eosc'
         RELEASE = 'flaskapp'
+        NAMESPACE = 'dev'
     }
 
     agent {
@@ -38,7 +38,7 @@ pipeline {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "helm upgrade --set image.tag=${env.GIT_COMMIT.take(7)} ${RELEASE} ./"
+                        sh "helm upgrade --install --namespace ${NAMESPACE} --create-namespace --force --set image.tag=${env.GIT_COMMIT.take(7)} ${RELEASE} ./"
                     }
                 }
             }
