@@ -39,7 +39,7 @@ pipeline {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "echo ${env.GIT_COMMIT}"
+                        sh "echo ${env.GIT_COMMIT:0:8}"
                         sh "helm upgrade ${RELEASE} ./"
                     }
                 }
