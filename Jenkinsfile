@@ -39,7 +39,8 @@ pipeline {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "helm upgrade --force ${RELEASE} ./"
+                        sh "echo ${env.BRANCH_NAME}"
+                        sh "helm upgrade ${RELEASE} ./"
                     }
                 }
             }
