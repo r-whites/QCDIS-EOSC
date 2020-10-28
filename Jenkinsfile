@@ -20,7 +20,7 @@ pipeline {
             steps {
                 dir('App') {
                     container('docker') {
-                        sh "docker build -t ${REGISTRY}:${VERSION} ."
+                        sh "docker build -t ${REGISTRY}:${env.GIT_COMMIT.take(7)} ."
                     }
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
                 container('docker') {
                     withDockerRegistry([credentialsId: "${REGISTRY_CREDENTIAL}", url: ""]) {
                         sh 'echo hello'
-                        sh "docker push ${REGISTRY}:${VERSION}"
+                        sh "docker push ${REGISTRY}:${env.GIT_COMMIT.take(7)}"
                     }
                 }
             }
@@ -39,8 +39,7 @@ pipeline {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "echo ${env.GIT_COMMIT.take(7)}"
-                        sh "helm upgrade ${RELEASE} ./"
+                        sh "helm upgrade --set image.tag=${env.GIT_COMMIT.take(7)} ${RELEASE} ./"
                     }
                 }
             }
