@@ -39,7 +39,7 @@ pipeline {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "echo ${env.BRANCH_NAME}"
+                        sh "echo ${env.GIT_COMMIT}"
                         sh "helm upgrade ${RELEASE} ./"
                     }
                 }
