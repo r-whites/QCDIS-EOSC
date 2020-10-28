@@ -29,7 +29,6 @@ pipeline {
             steps {
                 container('docker') {
                     withDockerRegistry([credentialsId: "${REGISTRY_CREDENTIAL}", url: ""]) {
-                        sh 'echo hello'
                         sh "docker push ${REGISTRY}:${env.GIT_COMMIT.take(7)}"
                     }
                 }
