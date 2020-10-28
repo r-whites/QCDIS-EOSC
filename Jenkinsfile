@@ -38,7 +38,7 @@ pipeline {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "helm upgrade --install --namespace ${NAMESPACE} --create-namespace --force --set image.tag=${env.GIT_COMMIT.take(7)} ${RELEASE} ./"
+                        sh "helm upgrade --install --namespace ${NAMESPACE} --force --set image.tag=${env.GIT_COMMIT.take(7)} ${RELEASE} ./"
                     }
                 }
             }
