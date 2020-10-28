@@ -8,9 +8,9 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-  - http:
-      paths:
-      - path: /testapp(/|$)(.*)
-        backend:
-          serviceName: {{ template "fullname" . }}
-          servicePort: 5000
+    - http:
+        paths:
+        - backend:
+            serviceName: {{ template "fullname" . }}
+            servicePort: http
+          path: /testapp(/|$)(.*)
