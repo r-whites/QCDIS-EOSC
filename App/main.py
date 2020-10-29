@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "Hello! This is the app content"
+    return "Hello! Change of content"
 
 
 if __name__ == "__main__":
