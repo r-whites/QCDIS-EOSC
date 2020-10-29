@@ -1,0 +1,16 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  creationTimestamp: "2020-10-28T11:01:16Z"
+  name: jenkins-admin-binding
+  resourceVersion: "1369322"
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterrolebindings/jenkins-admin-binding
+  uid: 42b0f76a-78fb-4e82-8625-d29cfb3ddcd8
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: admin
+subjects:
+- kind: ServiceAccount
+  name: jenkins-my-bloody-jenkins
+  namespace: jenkins
