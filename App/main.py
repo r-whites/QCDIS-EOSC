@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route("/")
 def hello():
-    return "This content is a test feature!"
+    return "Content to be approved in PR"
 
 
 if __name__ == "__main__":
