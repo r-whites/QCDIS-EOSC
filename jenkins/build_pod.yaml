@@ -21,7 +21,7 @@ spec:
           - cat
         tty: true
       - name: python
-        image: r-whites/python-testing:latest
+        image: rwhites/python-testing:latest
         command:
           - cat
         tty: true
