@@ -3,9 +3,9 @@ pipeline {
 
     environment {
         REGISTRY_CREDENTIAL = 'docker-registry'
-        REGISTRY = 'rwhites/eosc'
+        REGISTRY = 'rwhites/flaskapp'
         RELEASE = 'flaskapp'
-        NAMESPACE = 'dev'
+        NAMESPACE = "${env.BRANCH_NAME == "master" ? "prod" : "dev"}"
     }
 
     agent {
@@ -16,7 +16,16 @@ pipeline {
     }
 
     stages {
-        stage('Build Flask App') {
+        stage('Test App') {
+            steps {
+                dir('App') {
+                    container('python') {
+                        sh 'pytest -v'
+                    }
+                }
+            }
+        }
+        stage('Build Docker Image') {
             steps {
                 dir('App') {
                     container('docker') {
@@ -25,7 +34,7 @@ pipeline {
                 }
             }
         }
-        stage('Publish Flask App') {
+        stage('Publish Docker Image') {
             steps {
                 container('docker') {
                     withDockerRegistry([credentialsId: "${REGISTRY_CREDENTIAL}", url: ""]) {
@@ -34,11 +43,11 @@ pipeline {
                 }
             }
         }
-        stage('Update Flask App') {
+        stage('Update Cluster') {
             steps {
                 dir('helm/App') {
                     container('helm') {
-                        sh "helm upgrade --install --namespace ${NAMESPACE} --set image.tag=${env.GIT_COMMIT.take(7)} ${RELEASE} ./"
+                        sh "helm upgrade --install --namespace ${NAMESPACE} --set image.tag=${env.GIT_COMMIT.take(7)} ${RELEASE} --values values_${NAMESPACE}.yaml ./"
                     }
                 }
             }

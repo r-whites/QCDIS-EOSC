@@ -1,0 +1,6 @@
+image:
+    repository: rwhites/flaskapp
+    tag: latest
+replicaCount: 1
+
+path: /app-dev(/|$)(.*)
